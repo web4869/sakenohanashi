@@ -9,14 +9,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Serif+JP:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@700&display=swap"
         rel="stylesheet">
     <style>
+        :root {
+            --sake-navy: #161e2e;
+            --sake-gold: #c5a059;
+            --sake-bg: #fcfaf2;
+        }
+
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: #fcfaf2;
-            /* 米・和紙の色 */
+            background-color: var(--sake-bg);
             color: #1a1a1a;
+            line-height: 1.8;
+            /* 全体的に行間を広げて読みやすく */
+            word-break: auto-phrase;
+            /* 日本語の文節で改行しやすくする */
         }
 
         h1,
@@ -24,92 +33,116 @@
         h3,
         .serif {
             font-family: 'Noto Serif JP', serif;
+            line-height: 1.4;
         }
 
         .bg-sake-navy {
-            background-color: #161e2e;
-            /* 酒蔵のイメージ */
+            background-color: var(--sake-navy);
         }
 
         .text-sake-gold {
-            color: #c5a059;
-            /* 日本酒の黄金色 */
-        }
-
-        .border-sake-gold {
-            border-color: #c5a059;
+            color: var(--sake-gold);
         }
 
         .bg-sake-gold {
-            background-color: #c5a059;
+            background-color: var(--sake-gold);
         }
 
         .hero-gradient {
-            background: linear-gradient(rgba(22, 30, 46, 0.8), rgba(22, 30, 46, 0.8)), url('sake_main.jpg');
+            background: linear-gradient(rgba(22, 30, 46, 0.85), rgba(22, 30, 46, 0.85)), url('sake_main.jpg');
             background-size: cover;
             background-position: center;
         }
 
         .work-box {
-            background-color: rgba(197, 160, 89, 0.08);
-            border: 1px dashed #c5a059;
+            background-color: rgba(197, 160, 89, 0.1);
+            border: 1px dashed var(--sake-gold);
+            transition: all 0.3s ease;
+        }
+
+        .work-box:hover {
+            background-color: rgba(197, 160, 89, 0.15);
+        }
+
+        /* 改行コントロール用 */
+        .br-pc {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .br-pc {
+                display: block;
+            }
         }
     </style>
 </head>
 
-<body class="antialiased">
+<body class="antialiased text-slate-900">
 
     <!-- Header / Hero Section -->
-    <header class="hero-gradient text-white min-h-[80vh] flex flex-col items-center justify-center px-4 text-center">
+    <header class="hero-gradient text-white min-h-[90vh] flex flex-col items-center justify-center px-6 text-center">
         <div class="max-w-4xl">
-            <p class="text-sake-gold text-xl md:text-2xl mb-4 font-bold tracking-widest">元蔵人 × 日本酒BAR店主</p>
-            <h1 class="text-4xl md:text-6xl mb-6 leading-tight">日本酒の水先案内人が導く<br>「お店でちょっと得する日本酒の話」</h1>
-            <p class="text-lg md:text-xl mb-10 opacity-90 leading-relaxed">
-                「何を飲めばいいか分からない」から、好きな銘柄に出会うまで。<br class="hidden md:block">
+            <p class="text-sake-gold text-lg md:text-2xl mb-6 font-bold tracking-[0.2em]">元蔵人 × 日本酒BAR店主</p>
+            <h1 class="text-3xl md:text-6xl mb-8 leading-tight tracking-tight">
+                日本酒の水先案内人が導く<br class="br-pc">
+                「お店でちょっと得する日本酒の話」
+            </h1>
+            <p class="text-base md:text-xl mb-12 opacity-95 leading-relaxed max-w-2xl mx-auto">
+                「何を頼めばいいか分からない」から、<br class="md:hidden">好きな銘柄に出会うまで。<br class="br-pc">
                 プロだからこそ伝えられる、全4回のお酒の本音。
             </p>
             <a href="#register"
-                class="bg-sake-gold text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-opacity-90 transition transform hover:scale-105 inline-block shadow-lg">
+                class="bg-sake-gold text-white px-12 py-5 rounded-full font-bold text-lg hover:bg-opacity-90 transition transform hover:-translate-y-1 inline-block shadow-2xl">
                 イベントに予約する
             </a>
         </div>
     </header>
 
-    <!-- Navigation (Simple) -->
-    <nav class="bg-white border-b sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <span class="font-bold text-sake-navy">日本酒片手にーポンカター</span>
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#concept" class="hover:text-sake-gold">コンセプト</a>
-                <a href="#profile" class="hover:text-sake-gold">講師紹介</a>
-                <a href="#program" class="hover:text-sake-gold">開催内容</a>
-                <a href="#access" class="hover:text-sake-gold">アクセス</a>
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="font-bold text-sake-navy tracking-tighter">日本酒片手にーポンカター</span>
+            <div class="hidden md:flex space-x-10 text-sm font-bold">
+                <a href="#concept" class="hover:text-sake-gold transition">コンセプト</a>
+                <a href="#profile" class="hover:text-sake-gold transition">講師紹介</a>
+                <a href="#program" class="hover:text-sake-gold transition">開催内容</a>
+                <a href="#access" class="hover:text-sake-gold transition">アクセス</a>
             </div>
         </div>
     </nav>
 
     <!-- Concept Section -->
-    <section id="concept" class="py-20 px-4 max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl mb-8 border-b-2 border-sake-gold pb-4 inline-block">コンセプト</h2>
-        <p class="text-lg leading-relaxed mb-8 text-left md:text-center">
-            水先案内人とは、外海から来た船に乗り込み、入り組んだ港湾や狭い水路を安全に進むために指揮・誘導を行う専門家を指します。<br><br>
-            専門用語やラベルの数字という「霧」に包まれた日本酒の世界において<br>
-            「日本酒の水先案内人」は、元蔵人であり現役の日本酒BAR店主だからこその視点で、その味わいや文化、背景を初心者の方にもわかりやすくお伝えします。<br><br>
-            「何を飲めばいいかわからない」という迷いを、「自分で目利きし、本当に好きな一杯を選べる」楽しさへと変え、一人ひとりの「好き」を見つける手助けをいたします。
-        </p>
+    <section id="concept" class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-4xl mb-4 inline-block border-b-2 border-sake-gold pb-2">コンセプト</h2>
+        </div>
+        <div class="text-base md:text-lg leading-loose space-y-6 text-slate-800">
+            <p>
+                水先案内人とは、本来、外海から来た船に乗り込み、入り組んだ港湾や狭い水路を安全に進むために指揮・誘導を行う専門家を指します。
+            </p>
+            <p>
+                専門用語やラベルの数字という「霧」に包まれた日本酒の世界において、
+                「日本酒の水先案内人」は、元蔵人であり現役の日本酒BAR店主だからこその視点で、その味わいや文化、背景を初心者の方にもわかりやすくお伝えします。
+            </p>
+            <p class="font-medium text-slate-900">
+                「何を飲めばいいかわからない」という迷いを、「自分で目利きし、本当に好きな一杯を選べる」楽しさへと変え、一人ひとりの「好き」を見つける手助けをいたします。
+            </p>
+        </div>
     </section>
 
     <!-- Profile Section -->
-    <section id="profile" class="bg-white py-20 px-4">
+    <section id="profile" class="bg-white py-24 px-6">
         <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
-            <div class="w-64 h-64 flex-shrink-0 bg-gray-100 rounded-full overflow-hidden border-4 border-sake-gold">
+            <div
+                class="w-56 h-56 md:w-72 md:h-72 flex-shrink-0 bg-gray-100 rounded-full overflow-hidden border-4 border-sake-gold shadow-xl">
                 <img src="profile.jpg" alt="久野惣司" class="w-full h-full object-cover">
             </div>
-            <div>
-                <p class="text-sake-gold font-bold mb-2">日本酒の水先案内人</p>
-                <h2 class="text-4xl mb-6">久野 惣司 <span class="text-xl text-gray-500 font-normal">Soji Kuno</span></h2>
-                <div class="space-y-4 text-gray-700 leading-relaxed text-sm md:text-base">
-                    <p>1989年生まれ、平成元年生まれ。関西大学文学部比較宗教学専修卒。学生時代は落語研究会に所属</p>
+            <div class="flex-grow">
+                <p class="text-sake-gold font-bold mb-2 tracking-widest text-sm">日本酒の水先案内人</p>
+                <h2 class="text-3xl md:text-4xl mb-8">久野 惣司 <span
+                        class="text-lg text-gray-400 font-normal ml-2 tracking-normal">Soji Kuno</span></h2>
+                <div class="space-y-6 text-slate-700 leading-relaxed text-sm md:text-base">
+                    <p>1989年生まれ、平成元年生まれ。関西大学文学部比較宗教学専修卒。学生時代は落語研究会に所属。</p>
                     <p>SSI認定唎酒師を取得後、京都・伏見の「藤岡酒造（蒼空）」での蔵人見習い、兵庫・灘の「泉酒造（仙介）」にて蔵人として勤務。造り手の視点と苦労を肌で学ぶ。</p>
                     <p>2018年、大阪・中崎町に「日本酒片手にーポンカター」を開業。「日本酒×文化×エンターテインメント」を掲げ、現在は行政書士の資格も併せ持つ異色の「水先案内人」として活動中。</p>
                 </div>
@@ -118,99 +151,116 @@
     </section>
 
     <!-- Program Section -->
-    <section id="program" class="py-20 px-4">
+    <section id="program" class="py-24 px-6">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl mb-4">日本酒の「難しそう…」に溺れないために</h2>
-                <p class="text-gray-600 italic">3月から6月まで、月ごとに知識の解像度を高めていきます。</p>
+            <div class="text-center mb-20">
+                <h2 class="text-2xl md:text-4xl mb-6">日本酒の「難しそう…」に溺れないために</h2>
+                <p class="text-gray-500 text-sm md:text-base">3月から6月まで、月ごとに知識の解像度を高めていきます。</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid md:grid-cols-2 gap-10">
                 <!-- Round 1 -->
-                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 relative flex flex-col">
+                <div
+                    class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition">
                     <span
-                        class="absolute top-0 right-0 bg-sake-gold text-white px-4 py-1 text-sm font-bold">第1回：3月</span>
-                    <h3 class="text-xl font-bold mb-4 text-sake-navy">蔵人視点の日本酒</h3>
-                    <ul class="text-gray-700 space-y-2 mb-8 text-sm flex-grow">
-                        <li>・四季折々の日本酒と蔵人生活</li>
-                        <li>・蔵人が「好む」酒と市場で「売れる」酒</li>
-                        <li>・多様性の時代の日本酒</li>
+                        class="absolute top-0 right-0 bg-sake-gold text-white px-6 py-2 rounded-bl-2xl text-xs font-bold tracking-widest">VOL.01
+                        / 3月</span>
+                    <h3 class="text-xl md:text-2xl font-bold mb-6 text-sake-navy pr-16">蔵人視点の日本酒</h3>
+                    <ul class="text-slate-600 space-y-3 mb-10 text-sm md:text-base flex-grow">
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>四季折々の日本酒と蔵人生活</li>
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>蔵人が「好む」酒と市場で「売れる」酒</li>
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>多様性の時代の日本酒</li>
                     </ul>
-                    <div class="work-box p-4 rounded-lg">
-                        <div class="flex items-center mb-2">
-                            <svg class="w-5 h-5 text-sake-gold mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M10 2a8 8 0 100 16 8 8 0 000-16zM5.122 14.878a6 6 0 118.486 0 6.137 6.137 0 01-8.486 0z" />
-                            </svg>
-                            <span class="text-sake-gold font-bold text-sm tracking-widest">体験ワーク</span>
+                    <div class="work-box p-5 rounded-xl">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-sake-gold text-white p-1 rounded-md mr-3">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </span>
+                            <span class="text-sake-gold font-bold text-xs tracking-widest">体験ワーク</span>
                         </div>
-                        <p class="text-sm font-bold">同銘柄の「生」と「火入れ」の飲み比べ</p>
+                        <p class="text-sm md:text-base font-bold text-slate-800">同銘柄の「生」と「火入れ」の飲み比べ</p>
                     </div>
                 </div>
 
                 <!-- Round 2 -->
-                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 relative flex flex-col">
+                <div
+                    class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition">
                     <span
-                        class="absolute top-0 right-0 bg-sake-gold text-white px-4 py-1 text-sm font-bold">第2回：4月</span>
-                    <h3 class="text-xl font-bold mb-4 text-sake-navy">「辛口ください」から卒業する</h3>
-                    <ul class="text-gray-700 space-y-2 mb-8 text-sm flex-grow">
-                        <li>・日本酒度と体感する味のギャップの正体</li>
-                        <li>・地域別「辛口」の定義の違い（関西 vs 高知 vs 北陸）</li>
-                        <li>・世代別の「辛口」イメージ</li>
+                        class="absolute top-0 right-0 bg-sake-gold text-white px-6 py-2 rounded-bl-2xl text-xs font-bold tracking-widest">VOL.02
+                        / 4月</span>
+                    <h3 class="text-xl md:text-2xl font-bold mb-6 text-sake-navy pr-16">「辛口ください」から卒業する</h3>
+                    <ul class="text-slate-600 space-y-3 mb-10 text-sm md:text-base flex-grow">
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>日本酒度と体感する味のギャップの正体</li>
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>地域別「辛口」の定義の違い<br
+                                class="md:hidden">（関西 vs 高知 vs 北陸）</li>
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>世代別の「辛口」イメージ</li>
                     </ul>
-                    <div class="work-box p-4 rounded-lg">
-                        <div class="flex items-center mb-2">
-                            <svg class="w-5 h-5 text-sake-gold mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M10 2a8 8 0 100 16 8 8 0 000-16zM5.122 14.878a6 6 0 118.486 0 6.137 6.137 0 01-8.486 0z" />
-                            </svg>
-                            <span class="text-sake-gold font-bold text-sm tracking-widest">体験ワーク</span>
+                    <div class="work-box p-5 rounded-xl">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-sake-gold text-white p-1 rounded-md mr-3">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </span>
+                            <span class="text-sake-gold font-bold text-xs tracking-widest">体験ワーク</span>
                         </div>
-                        <p class="text-sm font-bold">日本酒度が同じでも「酸」で味が変わる瞬間の体感</p>
+                        <p class="text-sm md:text-base font-bold text-slate-800">日本酒度が同じでも「酸」で味が変わる瞬間の体感</p>
                     </div>
                 </div>
 
                 <!-- Round 3 -->
-                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 relative flex flex-col">
+                <div
+                    class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition">
                     <span
-                        class="absolute top-0 right-0 bg-sake-gold text-white px-4 py-1 text-sm font-bold">第3回：5月</span>
-                    <h3 class="text-xl font-bold mb-4 text-sake-navy">生酛と山廃の世界</h3>
-                    <ul class="text-gray-700 space-y-2 mb-8 text-sm flex-grow">
-                        <li>・山廃も生酛の仲間なのか？</li>
-                        <li>・現代の造りと伝統的な造り</li>
-                        <li>・実は一番大事なのは水</li>
+                        class="absolute top-0 right-0 bg-sake-gold text-white px-6 py-2 rounded-bl-2xl text-xs font-bold tracking-widest">VOL.03
+                        / 5月</span>
+                    <h3 class="text-xl md:text-2xl font-bold mb-6 text-sake-navy pr-16">生酛と山廃の世界</h3>
+                    <ul class="text-slate-600 space-y-3 mb-10 text-sm md:text-base flex-grow">
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>山廃も生酛の仲間なのか？</li>
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>現代の造りと伝統的な造り</li>
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>実は一番大事なのは水</li>
                     </ul>
-                    <div class="work-box p-4 rounded-lg">
-                        <div class="flex items-center mb-2">
-                            <svg class="w-5 h-5 text-sake-gold mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M10 2a8 8 0 100 16 8 8 0 000-16zM5.122 14.878a6 6 0 118.486 0 6.137 6.137 0 01-8.486 0z" />
-                            </svg>
-                            <span class="text-sake-gold font-bold text-sm tracking-widest">体験ワーク</span>
+                    <div class="work-box p-5 rounded-xl">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-sake-gold text-white p-1 rounded-md mr-3">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </span>
+                            <span class="text-sake-gold font-bold text-xs tracking-widest">体験ワーク</span>
                         </div>
-                        <p class="text-sm font-bold">冷酒と「お燗」で激変する山廃のポテンシャル体験</p>
+                        <p class="text-sm md:text-base font-bold text-slate-800">冷酒と「お燗」で激変する山廃のポテンシャル体験</p>
                     </div>
                 </div>
 
                 <!-- Round 4 -->
-                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 relative flex flex-col">
+                <div
+                    class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 relative flex flex-col hover:shadow-md transition">
                     <span
-                        class="absolute top-0 right-0 bg-sake-gold text-white px-4 py-1 text-sm font-bold">第4回：6月</span>
-                    <h3 class="text-xl font-bold mb-4 text-sake-navy">純米とアル添</h3>
-                    <ul class="text-gray-700 space-y-2 mb-8 text-sm flex-grow">
-                        <li>・アル添は「デザイン」のための研ぎ澄まされた技術</li>
-                        <li>・純米至上主義を捨てることで広がる多様性</li>
-                        <li>・シーンに合わせた「飲み疲れしない酒」の選び方</li>
+                        class="absolute top-0 right-0 bg-sake-gold text-white px-6 py-2 rounded-bl-2xl text-xs font-bold tracking-widest">VOL.04
+                        / 6月</span>
+                    <h3 class="text-xl md:text-2xl font-bold mb-6 text-sake-navy pr-16">純米とアル添</h3>
+                    <ul class="text-slate-600 space-y-3 mb-10 text-sm md:text-base flex-grow">
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>アル添は「デザイン」のための技術</li>
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>純米至上主義を捨てる多様性</li>
+                        <li class="flex items-start"><span class="text-sake-gold mr-2">・</span>シーン別「飲み疲れしない酒」の選び方</li>
                     </ul>
-                    <div class="work-box p-4 rounded-lg">
-                        <div class="flex items-center mb-2">
-                            <svg class="w-5 h-5 text-sake-gold mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M10 2a8 8 0 100 16 8 8 0 000-16zM5.122 14.878a6 6 0 118.486 0 6.137 6.137 0 01-8.486 0z" />
-                            </svg>
-                            <span class="text-sake-gold font-bold text-sm tracking-widest">体験ワーク</span>
+                    <div class="work-box p-5 rounded-xl">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-sake-gold text-white p-1 rounded-md mr-3">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </span>
+                            <span class="text-sake-gold font-bold text-xs tracking-widest">体験ワーク</span>
                         </div>
-                        <p class="text-sm font-bold">純米 vs アル添。先入観なしのブラインド試飲</p>
+                        <p class="text-sm md:text-base font-bold text-slate-800">純米 vs アル添。先入観なしのブラインド試飲</p>
                     </div>
                 </div>
             </div>
@@ -218,37 +268,48 @@
     </section>
 
     <!-- Venue / Access Section -->
-    <section id="access" class="py-20 bg-sake-navy text-white px-4">
+    <section id="access" class="py-24 bg-sake-navy text-white px-6">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl mb-12 text-center text-sake-gold font-bold">会場・アクセス</h2>
-            <div class="flex flex-col md:flex-row gap-8 items-stretch">
+            <h2 class="text-3xl mb-16 text-center text-sake-gold font-bold tracking-widest">会場・アクセス</h2>
+            <div class="flex flex-col lg:flex-row gap-10 items-stretch">
                 <!-- Info text -->
-                <div class="md:w-5/12 bg-white/5 p-8 rounded-xl backdrop-blur-sm border border-white/10">
-                    <h3 class="text-2xl font-bold mb-6 text-sake-gold">102 by ichimaruni</h3>
-                    <div class="space-y-6 text-base leading-relaxed">
+                <div
+                    class="lg:w-5/12 bg-white/5 p-8 md:p-10 rounded-2xl backdrop-blur-sm border border-white/10 flex flex-col justify-between">
+                    <div class="space-y-8">
                         <div>
-                            <p class="text-sake-gold text-xs font-bold uppercase tracking-widest mb-1">住所</p>
-                            <p>〒530-0015 大阪市北区中崎西4-1-29<br><span class="text-sm opacity-70">（ichimaruni本店の横）</span></p>
+                            <h3 class="text-2xl font-bold mb-4 text-sake-gold">102 by ichimaruni</h3>
+                            <p class="text-sm opacity-70 mb-2 font-medium tracking-wide">オルタナティブスペース</p>
                         </div>
-                        <div>
-                            <p class="text-sake-gold text-xs font-bold uppercase tracking-widest mb-1">最寄り駅</p>
-                            <ul class="text-sm space-y-1 opacity-90">
-                                <li>・地下鉄谷町線「中崎町駅」徒歩約5分</li>
-                                <li>・各線「梅田駅」から徒歩約15分</li>
-                            </ul>
+                        <div class="space-y-6">
+                            <div>
+                                <p
+                                    class="text-sake-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-2 opacity-80">
+                                    所在地</p>
+                                <p class="text-sm md:text-base leading-relaxed">〒530-0015 大阪市北区中崎西4-1-29<br><span
+                                        class="text-sm opacity-60">（ichimaruni本店の横）</span></p>
+                            </div>
+                            <div>
+                                <p
+                                    class="text-sake-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-2 opacity-80">
+                                    アクセス</p>
+                                <ul class="text-sm space-y-2 opacity-90">
+                                    <li class="flex items-start"><span class="mr-2">・</span>地下鉄谷町線「中崎町駅」徒歩約5分</li>
+                                    <li class="flex items-start"><span class="mr-2">・</span>各線「梅田駅」から徒歩約15分</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="pt-4 border-t border-white/10">
-                            <p class="text-xs opacity-60 italic leading-relaxed">
-                                中崎町の情緒ある路地裏に位置する、ichimaruni本店に隣接したギャラリー＆イベントスペースです。</p>
-                        </div>
+                    </div>
+                    <div class="pt-8 border-t border-white/10 mt-8">
+                        <p class="text-xs opacity-50 italic leading-loose">
+                            中崎町の情緒ある路地裏に位置する、ichimaruni本店に隣接したギャラリー＆イベントスペースです。</p>
                     </div>
                 </div>
                 <!-- Map -->
-                <div class="md:w-7/12 rounded-xl overflow-hidden shadow-2xl min-h-[400px]">
+                <div class="lg:w-7/12 rounded-2xl overflow-hidden shadow-2xl min-h-[350px] relative">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3279.917467610419!2d135.50155097626155!3d34.70725358319698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e6931599878d%3A0xc622616a964a2f85!2sichimaruni!5e0!3m2!1sja!2sjp!4v1710000000000!5m2!1sja!2sjp"
                         width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
+                        referrerpolicy="no-referrer-when-downgrade" class="absolute inset-0">
                     </iframe>
                 </div>
             </div>
@@ -256,19 +317,22 @@
     </section>
 
     <!-- Registration Section -->
-    <section id="register" class="py-24 px-4 bg-white text-center">
+    <section id="register" class="py-24 px-6 bg-white text-center">
         <div class="max-w-2xl mx-auto">
-            <h2 class="text-3xl mb-6">ご予約</h2>
-            <p class="text-gray-600 mb-10">
-                各回、定員になり次第締め切らせていただきます。（定員10名）<br>
+            <h2 class="text-3xl mb-8 font-bold">ご予約</h2>
+            <p class="text-slate-600 mb-12 text-sm md:text-base leading-loose">
+                各回、定員になり次第締め切らせていただきます。（定員10名）<br class="br-pc">
                 プロの「本音」を聞きながら、日本酒の本当の楽しみ方を見つけましょう。
             </p>
-            <div class="bg-gray-50 p-8 rounded-2xl border-2 border-dashed border-gray-200">
-                <p class="font-bold text-xl mb-6">参加費用：各回 4,000円（税込）</p>
-                <p class="text-sm text-gray-500 mb-8">※3種あてセット：参加費＋500円</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <div class="bg-gray-50 p-10 rounded-3xl border border-gray-100 shadow-sm">
+                <p class="font-bold text-2xl mb-6 text-slate-800 tracking-tight">参加費用：各回 4,000円<span
+                        class="text-sm font-normal ml-1">（税込）</span></p>
+                <div class="inline-block px-4 py-1 bg-sake-gold/10 text-sake-gold rounded-full text-xs font-bold mb-10">
+                    ※3種あてセット：参加費＋500円
+                </div>
+                <div>
                     <a href="https://forms.gle/wSCdMMWsLnSxsWF86" target="_blank" rel="noopener noreferrer"
-                        class="bg-sake-navy text-white px-8 py-4 rounded-lg font-bold hover:bg-opacity-90 transition inline-block">
+                        class="bg-sake-navy text-white px-12 py-5 rounded-xl font-bold hover:bg-opacity-90 transition inline-block shadow-lg w-full sm:w-auto">
                         申し込みフォームへ
                     </a>
                 </div>
@@ -277,21 +341,25 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-100 py-12 px-4 border-t text-center">
+    <footer class="bg-gray-50 py-16 px-6 border-t text-center">
         <div class="max-w-4xl mx-auto">
-            <p class="font-bold text-sake-navy mb-4">日本酒片手にーポンカター / ポンカタ行政書士事務所</p>
-            <p class="text-sm text-gray-500">&copy; 2025 Ponkata. All rights reserved.</p>
+            <p class="font-bold text-sake-navy mb-4 tracking-tight">日本酒片手にーポンカター / ポンカタ行政書士事務所</p>
+            <p class="text-xs text-slate-400">&copy; 2025 Ponkata. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scroll for anchors
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80, // Offset for sticky nav
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
